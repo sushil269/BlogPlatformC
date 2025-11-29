@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page title -->
+<h2 class="fw-bold mb-3">Tags</h2>
+
+<!-- List container for displaying tags -->
+<div class="list-group shadow-sm">
+
+    <!-- Loop through all tags -->
+    {% for t in tags %}
+        <div class="list-group-item">
+            <!-- Display tag name -->
+            <strong>{{ t.name }}</strong>
+        </div>
+
+    <!-- Fallback message if no tags exist -->
+    {% empty %}
+        <p>No tags available.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

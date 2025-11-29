@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">BlogPlatform</a>
+
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Menu -->
+      <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+
+              <!-- Home -->
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'home' %}">Home</a>
+              </li>
+
+              {% if user.is_authenticated %}
+
+                  <!-- Dashboard -->
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                  </li>
+
+                  <!-- Profile -->
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'profile_edit' %}">Profile</a>
+                  </li>
+
+                  <!-- Logout -->
+                  <li class="nav-item">
+                      <a class="nav-link text-danger" href="{% url 'logout' %}">Logout</a>
+                  </li>
+
+              {% else %}
+
+                  <!-- Login -->
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+
+                  <!-- Register -->
+                  <li class="nav-item">
+                      <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+
+              {% endif %}
+
+          </ul>
+      </div>
+  </div>
+</nav>

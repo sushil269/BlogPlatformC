@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Page heading -->
+<h2 class="fw-bold mb-3">Categories</h2>
+
+<!-- Wrapper for category list -->
+<div class="list-group shadow-sm">
+    {% for c in categories %}
+    <div class="list-group-item">
+        <strong>{{ c.name }}</strong>
+    </div>
+    {% endfor %}
+
+    <!-- If no categories exist -->
+    {% if categories|length == 0 %}
+    <div class="list-group-item">
+        <em>No categories available.</em>
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}

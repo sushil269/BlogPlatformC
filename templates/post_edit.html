@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="fw-bold mb-3">Edit Post</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- Title -->
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" value="{{ post.title }}" required>
+    </div>
+
+    <!-- Content -->
+    <div class="mb-3">
+        <label class="form-label">Content</label>
+        <textarea name="content" rows="4" class="form-control" required>{{ post.content }}</textarea>
+    </div>
+
+    <!-- Status -->
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select name="status" class="form-select">
+            <option value="draft" {% if post.status == "draft" %}selected{% endif %}>Draft</option>
+            <option value="published" {% if post.status == "published" %}selected{% endif %}>Published</option>
+        </select>
+    </div>
+
+    <!-- Categories -->
+    <div class="mb-3">
+        <label class="fw-bold">Categories</label><br>
+        {% for c in categories %}
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input"
+                       name="categories" value="{{ c.id }}"
+                       {% if c in post.categories.all %} checked {% endif %}>
+                <label class="form-check-label">{{ c.name }}</label>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Tags -->
+    <div class="mb-3">
+        <label class="fw-bold">Tags</label><br>
+        {% for t in tags %}
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input"
+                       name="tags" value="{{ t.id }}"
+                       {% if t in post.tags.all %} checked {% endif %}>
+                <label class="form-check-label">{{ t.name }}</label>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Save Button -->
+    <button class="btn btn-primary">Save</button>
+
+</form>
+
+{% endblock %}

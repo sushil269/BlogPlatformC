@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="fw-bold mb-3">Your Posts</h2>
+
+<a href="{% url 'post_create' %}" class="btn btn-success mb-3">+ Create New Post</a>
+
+<div class="list-group">
+    {% for p in posts %}
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+
+            <!-- Post title -->
+            <strong>{{ p.title }}</strong>
+
+            <!-- Edit + Delete Buttons -->
+            <div class="d-flex gap-2">
+                <a href="{% url 'post_edit' p.id %}" class="btn btn-sm btn-primary">Edit</a>
+
+                <a href="{% url 'post_delete' p.id %}" 
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Are you sure you want to delete this post?');">
+                    Delete
+                </a>
+            </div>
+
+        </div>
+    {% empty %}
+        <p>No posts yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
+

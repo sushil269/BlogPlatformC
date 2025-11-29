@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Profile Edit Container-->
+<div class="container mt-4" style="max-width: 600px;">
+
+    <h2 class="fw-bold mb-3">Edit Profile</h2>
+     
+    {% if success %}
+    <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+     <!-- Profile edit form-->
+
+    <form method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        <!-- Username field -->
+
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control mb-3" name="username" value="{{ user.username }}" required>
+        <!-- Email field -->
+
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control mb-3" name="email" value="{{ user.email }}" required>
+        <!-- Bio field -->
+
+        <label class="form-label">Bio</label>
+        <textarea class="form-control mb-3" name="bio">{{ user.bio }}</textarea>
+        <!-- Profile picture sections -->
+
+        <label class="form-label">Profile Picture</label><br>
+        
+        <!-- Default avatar for users without a profile picture -->
+        {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" class="rounded-circle mb-3" width="80" height="80">
+        {% else %}
+            <img src="https://ui-avatars.com/api/?name={{ user.username }}" class="rounded-circle mb-3" width="80" height="80">
+        {% endif %}
+
+        <input type="file" class="form-control mb-3" name="profile_picture">
+        <!-- Submit button -->
+        <button class="btn btn-primary">Save Changes</button>
+    </form>
+
+</div>
+
+{% endblock %}

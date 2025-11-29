@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm p-4">
+
+            <!-- Title -->
+            <h3 class="fw-bold text-center mb-3">Create Account</h3>
+
+            <!-- Success message -->
+            {% if success %}
+                <div class="alert alert-success">{{ success }}</div>
+            {% endif %}
+
+            <!-- Error message -->
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <!-- Registration Form -->
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input name="username" class="form-control" required>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control" required>
+                </div>
+
+                <!-- Role selection -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Role</label>
+                    <select name="role" class="form-select">
+                        <option value="reader">Reader</option>
+                        <option value="author">Author</option>
+                    </select>
+                </div>
+
+                <!-- Profile Picture -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Profile Picture</label>
+                    <input type="file" name="profile_picture" class="form-control">
+                </div>
+
+                <!-- Submit button -->
+                <button class="btn btn-success w-100">Register</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

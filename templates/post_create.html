@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page title -->
+<h2 class="fw-bold mb-3">Create Post</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    <!-- Post title input -->
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" required>
+    </div>
+    <!-- Post content input -->
+    <div class="mb-3">
+        <label class="form-label">Content</label>
+        <textarea name="content" class="form-control" rows="4" required></textarea>
+    </div>
+    <!-- Publish status selection -->
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select name="status" class="form-select">
+            <option value="draft">Draft</option>
+            <option value="published">Published</option>
+        </select>
+    </div>
+    <!-- Categories selection(multiple checkboxes) -->
+    <div class="mb-3">
+        <label class="fw-bold">Categories</label><br>
+        {% for c in categories %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="categories" value="{{ c.id }}">
+                <label class="form-check-label">{{ c.name }}</label>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Tag selction(multiple checkboxes) -->
+    <div class="mb-3">
+        <label class="fw-bold">Tags</label><br>
+        {% for t in tags %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="tags" value="{{ t.id }}">
+                <label class="form-check-label">{{ t.name }}</label>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- Submit button -->
+    <button class="btn btn-primary">Create</button>
+</form>
+
+{% endblock %}
+
+
+
+
+
